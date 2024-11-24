@@ -10,6 +10,7 @@ class CategoriesController extends Controller
 {
     public function index()
     {
+        // Mengambil semua data categories
         $categories = Categories::all();
         return view('categories-view', compact('categories'));
     }
@@ -21,10 +22,12 @@ class CategoriesController extends Controller
 
     public function store(Request $request)
     {
+        // Validasi input
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
         ]);
 
+        // Simpan data buku
         Categories::create([
             'name' => $request->name
         ]);
@@ -35,17 +38,18 @@ class CategoriesController extends Controller
 
     public function edit(Categories $categories)
     {
-       
         return view('edit-categories-view', compact('categories'));
     }
 
 
     public function update(Request $request, Categories $categories)
     {
+        // Validasi input
        $validatedData = $request->validate([
             'name' => ['required', 'string', 'max:255'],
         ]);
 
+        // Update data user
         $categories->name = $validatedData['name'];
         $categories->save();
         return redirect()->route('categories-index')->with('success', 'Category updated successfully.');

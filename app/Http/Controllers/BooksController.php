@@ -43,13 +43,15 @@ class BooksController extends Controller
 
     public function create()
     {
+        //Mengambil semua data categories
         $categories = Categories::all();
+
         return view('create-book-view', compact('categories'));
     }
 
     public function store(Request $request)
     {
-
+        // Validasi input
         $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'author' => ['required', 'string', 'max:255'],
@@ -65,6 +67,7 @@ class BooksController extends Controller
         }
 
 
+        // Simpan data buku
         $book = Books::create([
             'title' => $request->title,
             'author' => $request->author,
@@ -73,7 +76,9 @@ class BooksController extends Controller
 
         ]);
 
+        // Menghubungkan buku dengan kategori
         $book->categories()->attach($request->categories);
+
 
 
         return redirect()->route('books-index')->with('success', 'Book added successfully.');
@@ -81,13 +86,16 @@ class BooksController extends Controller
 
     public function edit(Books $book)
     {
+        //Mengambil semua data categories
         $categories = Categories::all();
+
         return view('edit-book-view', compact('book', 'categories'));
     }
 
 
     public function update(Request $request, Books $book)
     {
+        // Validasi input
         $validatedData = $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'author' => ['required', 'string', 'max:255'],

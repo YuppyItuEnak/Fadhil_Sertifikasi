@@ -20,6 +20,7 @@ class UserController extends Controller
     public function create(Request $request)
     {
 
+        //Validasi input
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -29,6 +30,7 @@ class UserController extends Controller
         ]);
 
 
+        // Simpan data user
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -43,6 +45,7 @@ class UserController extends Controller
 
 
     public function usershow(){
+        //Mengambil semua data user
         $users = User::all();
         return view('user-view', compact('users'));
     }
@@ -54,6 +57,7 @@ class UserController extends Controller
     //Update Register
     public function update(Request $request , User $user)
     {
+        //Validasi input
         $validatedData =  $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -62,6 +66,7 @@ class UserController extends Controller
             'role' => ['required', 'in:librarian,member'],
         ]);
 
+        // Update data user
         $user->name = $validatedData['name'];
         $user->email = $validatedData['email'];
         $user->role = $validatedData['role'];

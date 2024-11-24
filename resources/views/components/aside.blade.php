@@ -1,9 +1,11 @@
 <aside id="logo-sidebar"
     class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0"
     aria-label="Sidebar">
+    {{-- Dashboard Navigation Sidebar --}}
     <div class="h-full px-3 pb-4 overflow-y-auto bg-white">
         <ul class="space-y-2 font-medium">
             <li>
+                {{-- Dashboard Section --}}
                 <a href="{{ route('showAll') }}"
                     class="flex items-center justify-between w-full p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
                     <div class="flex items-center">
@@ -22,7 +24,7 @@
                     </div>
                 </a>
             </li>
-            <!-- Add Book -->
+            <!-- Book Section -->
             <li>
                 <button type="button" onclick="toggleMenu('book-menu')"
                     class="flex items-center justify-between w-full p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
@@ -56,7 +58,7 @@
                 </ul>
             </li>
 
-            <!-- Add Categories -->
+            <!-- Categories Section -->
             <li>
                 <button type="button" onclick="toggleMenu('categories-menu')"
                     class="flex items-center justify-between w-full p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
@@ -112,7 +114,7 @@
                 </ul>
             </li>
 
-            <!-- Add User -->
+            <!-- User Section -->
             <li>
                 <button type="button" onclick="toggleMenu('user-menu')"
                     class="flex items-center justify-between w-full p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
