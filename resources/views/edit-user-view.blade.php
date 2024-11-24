@@ -7,7 +7,7 @@
                         Edit an account
                     </h1>
                     <form class="space-y-4 md:space-y-6" action="{{ route('register-update', $user->id) }}" method="POST">
-                        {{-- @dd($user) --}}
+                    
 
                         @csrf
                         @method('PUT')

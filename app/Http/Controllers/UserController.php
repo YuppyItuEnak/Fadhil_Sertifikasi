@@ -59,7 +59,7 @@ class UserController extends Controller
     //Update Register
     public function update(Request $request, User $user)
     {
-        // dd($user);
+     
         //Validasi input
         $validatedData =  $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -69,16 +69,9 @@ class UserController extends Controller
             'role' => ['required', 'in:librarian,member'],
         ]);
 
-        // $user = User::findOrFail($request->id);
+
         $user->update($validatedData);
 
-        // Update data user
-        // $user->name = $validatedData['name'];
-        // $user->email = $validatedData['email'];
-        // $user->role = $validatedData['role'];
-        // $user->phone = $validatedData['phone'];
-        // $user->password = Hash::make($validatedData['password']);
-        // $user->save();
 
 
 
