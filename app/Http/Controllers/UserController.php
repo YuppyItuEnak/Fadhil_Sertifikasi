@@ -39,46 +39,55 @@ class UserController extends Controller
             'phone' => $request->phone
         ]);
 
-        return redirect('/users-index')->with('success', 'Registration successful!');
+        return redirect()->route('users-index')->with('success', 'Registration successful!');
     }
 
 
 
-    public function usershow(){
+    public function usershow()
+    {
         //Mengambil semua data user
         $users = User::all();
         return view('user-view', compact('users'));
     }
 
-    public function edit(User $user){
+    public function edit(User $user)
+    {
         return view('edit-user-view', compact('user'));
     }
 
     //Update Register
-    public function update(Request $request , User $user)
+    public function update(Request $request, User $user)
     {
+        // dd($user);
         //Validasi input
         $validatedData =  $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
             'password' => ['required', 'string', 'min:8'],
             'phone' => ['required', 'string', 'max:255'],
             'role' => ['required', 'in:librarian,member'],
         ]);
 
-        // Update data user
-        $user->name = $validatedData['name'];
-        $user->email = $validatedData['email'];
-        $user->role = $validatedData['role'];
-        $user->phone = $validatedData['phone'];
-        $user->password = Hash::make($validatedData['password']);
-        $user->save();
+        // $user = User::findOrFail($request->id);
+        $user->update($validatedData);
 
-        return redirect('/users-index')->with('success', 'Registration successful!');
+        // Update data user
+        // $user->name = $validatedData['name'];
+        // $user->email = $validatedData['email'];
+        // $user->role = $validatedData['role'];
+        // $user->phone = $validatedData['phone'];
+        // $user->password = Hash::make($validatedData['password']);
+        // $user->save();
+
+
+
+        return redirect()->route('users-index')->with('success', 'Registration successful!');
     }
 
 
-    public function destroy(User $user){
+    public function destroy(User $user)
+    {
         $user->delete();
         return redirect('/users-index')->with('success', 'Registration successful!');
     }

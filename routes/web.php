@@ -18,8 +18,8 @@ Route::get('/dashboard', function () {
 
 Route::get('/register-form', [UserController::class, 'index'])->name('register-form');
 Route::post('/register', [UserController::class, 'create'])->name('register');
-Route::get('/edit/{user}', [UserController::class, 'edit'])->name('register-edit');
-Route::post('/register/{user}/update', [UserController::class, 'update'])->name('register-update');
+Route::get('/edit/{user}/users', [UserController::class, 'edit'])->name('register-edit');
+Route::put('/register/{user}', [UserController::class, 'update'])->name('register-update');
 Route::get('/users', [UserController::class, 'usershow'])->name('users-index');
 Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users-destroy');
 
